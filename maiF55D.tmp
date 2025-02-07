@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx4l3ii2qfg6"]
+
+[ext_resource type="Script" path="res://PlayerController.gd" id="1_ghrhs"]
+[ext_resource type="Texture2D" uid="uid://cef6cronstv21" path="res://acorn.png" id="1_m2bts"]
+[ext_resource type="Texture2D" uid="uid://co3xl0lj3alkx" path="res://aim.png" id="3_gp105"]
+[ext_resource type="Script" path="res://AimInput.gd" id="4_e1fhv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_md5wf"]
+size = Vector3(67.8302, 1, 71.5948)
+
+[sub_resource type="QuadMesh" id="QuadMesh_48u6f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4vc1"]
+albedo_color = Color(0.241156, 0.241156, 0.241156, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qkjof"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_261k2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m2bts")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b707e"]
+height = 14.1359
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v5ndm"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="FloorHitbox" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356728, 0, 0.0552368)
+shape = SubResource("BoxShape3D_md5wf")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
+mesh = SubResource("QuadMesh_48u6f")
+surface_material_override/0 = SubResource("StandardMaterial3D_t4vc1")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04651, 6.33318)
+script = ExtResource("1_ghrhs")
+
+[node name="PlayerHitbox" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_qkjof")
+
+[node name="Aim" type="Sprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04651, -6.33318)
+pixel_size = 0.0004
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 2
+texture = ExtResource("3_gp105")
+script = ExtResource("4_e1fhv")
+
+[node name="PlayerSprite" type="AnimatedSprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, -0.0367699, 0)
+sprite_frames = SubResource("SpriteFrames_261k2")
+
+[node name="AmbientLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 26.504, 13.4071)
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 26.504, 13.4071)
+
+[node name="Tree" type="StaticBody3D" parent="."]
+
+[node name="TreeHitbox" type="CollisionShape3D" parent="Tree"]
+shape = SubResource("CylinderShape3D_b707e")
+
+[node name="TreeMesh" type="MeshInstance3D" parent="Tree"]
+transform = Transform3D(1, 0, 0, 0, 7.105, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v5ndm")

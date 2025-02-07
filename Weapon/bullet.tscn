@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd1aivm672vcf"]
+
+[ext_resource type="Script" path="res://Weapon/BulletController.gd" id="1_t5psb"]
+[ext_resource type="Texture2D" uid="uid://whdswitdtuhw" path="res://Weapon/bullet.png" id="2_or1dp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eh6sh"]
+
+[node name="Bullet" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0586, 0.949697, 0)
+collision_layer = 6
+collision_mask = 6
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 0.138
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_t5psb")
+
+[node name="BulletSprite" type="Sprite3D" parent="."]
+cast_shadow = 0
+billboard = 1
+shaded = true
+texture = ExtResource("2_or1dp")
+
+[node name="BulletHitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_eh6sh")

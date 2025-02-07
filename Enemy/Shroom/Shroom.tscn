@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b72p5dhyfb3ov"]
+
+[ext_resource type="Script" path="res://Enemy/Shroom/ShroomController.gd" id="1_4vr4w"]
+[ext_resource type="Texture2D" uid="uid://cm6wrgrq1sxeq" path="res://Enemy/Shroom/shroom.png" id="2_r1edt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qkjof"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sp4q6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r1edt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SimpleShroom" type="CharacterBody3D" groups=["enemy"]]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_4vr4w")
+
+[node name="EnemyHitbox" type="CollisionShape3D" parent="." groups=["enemy"]]
+shape = SubResource("CapsuleShape3D_qkjof")
+
+[node name="EnemySprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 1, 0)
+cast_shadow = 2
+shaded = true
+sprite_frames = SubResource("SpriteFrames_sp4q6")
